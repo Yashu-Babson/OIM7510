@@ -785,6 +785,18 @@ def _(mo):
     return
 
 
+@app.cell
+def _():
+    max(["9.50", "16.75", "22.25"])
+    return
+
+
+@app.cell
+def _():
+    max([9.50, 16.75, 22.25])
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -814,6 +826,11 @@ def _(mo):
     2. Which line would you change, and why is it a different line from the one Python named?
     3. What would you change it to? More than one answer is defensible, so state the rule you chose.
     """)
+    return
+
+
+@app.cell
+def _():
     return
 
 
