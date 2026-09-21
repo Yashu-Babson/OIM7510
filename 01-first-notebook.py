@@ -51,6 +51,13 @@ def _():
 
 @app.cell
 def _():
+    import marimo as mo
+
+    return (mo,)
+
+
+@app.cell
+def _():
     return
 
 
@@ -104,8 +111,7 @@ def _(mo):
 
 @app.cell
 def _():
-    freight_charges = [16.75, 22.25, 25.00, 20.25, 36.25]
-    freight_charges
+    freight_charges = [999.99,22.25,25.00,20.25,36.25]
     return (freight_charges,)
 
 
@@ -202,8 +208,14 @@ def _(mo):
 
 @app.cell
 def _():
-    x = 5
+    x = 50
     return (x,)
+
+
+@app.cell
+def _(x):
+    print(x)
+    return
 
 
 @app.cell
@@ -231,6 +243,11 @@ def _(s):
 
 @app.cell
 def _():
+    return
+
+
+@app.cell
+def _():
     order = 3
     return (order,)
 
@@ -243,9 +260,9 @@ def _(order):
 
 @app.cell
 def _(order, x):
-    totals = x * order - 10
-    totals
-    return
+    total = x * order - 10
+    total
+    return (total,)
 
 
 @app.cell(hide_code=True)
@@ -328,7 +345,6 @@ def _(mo):
 @app.cell
 def _():
     orders = [10248, 10249, 10250, 10251, 10252]
-    orders
     return (orders,)
 
 
@@ -348,6 +364,72 @@ def _(mo):
     6. `orders * 2`, then `orders + freight_charges`. Neither one is an error.
     7. `sorted(freight_charges)`, then `sorted(freight_charges, reverse=True)`. What did `reverse=True` change, and did `freight_charges` itself change?
     """)
+    return
+
+
+@app.cell
+def _(freight_charges):
+    freight_charges[-1]
+    return
+
+
+@app.cell
+def _(freight_charges):
+    freight_charges[:3]
+    return
+
+
+@app.cell
+def _(orders):
+    orders [0]
+    return
+
+
+@app.cell
+def _(freight_charges):
+    freight_charges[0]
+    return
+
+
+@app.cell
+def _():
+    category = "Confections"
+    return (category,)
+
+
+@app.cell
+def _(category):
+    len(category)
+    return
+
+
+@app.cell
+def _(orders):
+    sum(orders)
+    return
+
+
+@app.cell
+def _(orders):
+    orders * 2
+    return
+
+
+@app.cell
+def _(freight_charges, orders):
+    orders + freight_charges
+    return
+
+
+@app.cell
+def _(freight_charges):
+    sorted(freight_charges)
+    return
+
+
+@app.cell
+def _(freight_charges):
+    sorted(freight_charges, reverse =True)
     return
 
 
@@ -377,6 +459,24 @@ def _(mo):
     return
 
 
+@app.cell
+def _(freight_charges, orders):
+    type(freight_charges[0]), type(orders[0])
+    return
+
+
+@app.cell
+def _():
+    type("Confections")
+    return
+
+
+@app.cell
+def _(freight_charges):
+    type(freight_charges[0] > 20)
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -387,6 +487,18 @@ def _(mo):
     1. `"16.75" + "22.25"`
     2. `16.75 + "22.25"`
     """)
+    return
+
+
+@app.cell
+def _():
+    "16.75" + "22.25"
+    return
+
+
+@app.cell
+def _():
+    16.75 + "22.25"
     return
 
 
@@ -424,6 +536,18 @@ def _(mo):
     return
 
 
+@app.cell
+def _(freight_charges):
+    freight_charges[0] > 20
+    return
+
+
+@app.cell
+def _(freight_charges):
+    freight_charges[-1] == max(freight_charges)
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -450,6 +574,12 @@ def _(mo):
     return
 
 
+@app.cell
+def _(freight_charges, orders):
+    print(f"Order {orders[0]} paid ${freight_charges[0]:.2f} in freight.")
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -459,6 +589,12 @@ def _(mo):
 
     Your sentence should show `$120.50` and `$24.10`.
     """)
+    return
+
+
+@app.cell
+def _(freight_charges, total):
+    print(f"The total freight is ${total:.2f}, and the average charge is ${total / len(freight_charges):.2f}.")
     return
 
 
@@ -491,6 +627,16 @@ def _(mo):
 
     📖 Handbook: Python §4 Conditionals, §12 Iterating over a list with `for`, §13 Filtering and the accumulator
     """)
+    return
+
+
+@app.cell
+def _(freight_charges):
+    over_20 = []
+    for charge in freight_charges:
+        if charge > 20:
+            over_20.append(charge)
+    over_20
     return
 
 
@@ -530,6 +676,18 @@ def _(mo):
     return
 
 
+@app.cell
+def _(freight_charges):
+    charges_below_25 = []
+
+    for charge_below_25 in freight_charges:
+        if charge_below_25 < 25:
+            charges_below_25.append(charge_below_25)
+
+    charges_below_25
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -550,6 +708,51 @@ def _(mo):
     return
 
 
+@app.cell
+def _():
+    import pandsa
+
+    return
+
+
+app._unparsable_cell(
+    r"""
+    Python could not find a package named pandsa because the package name is misspelled. The correct name is pandas.
+    """,
+    name="_"
+)
+
+
+@app.cell
+def _():
+    open("sales.csv")
+    return
+
+
+app._unparsable_cell(
+    r"""
+    Python could not find sales.csv in the notebook’s current folder.
+    """,
+    name="_"
+)
+
+
+app._unparsable_cell(
+    r"""
+    new_charges = [16.75, 22.25
+    """,
+    name="_"
+)
+
+
+app._unparsable_cell(
+    r"""
+    Python cannot understand the statement because the list’s opening bracket [ has no matching closing bracket ].
+    """,
+    name="_"
+)
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -559,6 +762,12 @@ def _(mo):
 
     `max(["9.50", "16.75", "22.25"])`
     """)
+    return
+
+
+@app.cell
+def _():
+    max(["9.50", "16.75", "22.25"])
     return
 
 

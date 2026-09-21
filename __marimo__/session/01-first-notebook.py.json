@@ -19,6 +19,12 @@
       "console": []
     },
     {
+      "id": "MHKa",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
       "id": "Jxyv",
       "code_hash": null,
       "outputs": [],
@@ -85,12 +91,12 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "bb74efdbc983ea90b6751814ad1974a4",
+      "code_hash": "be775328ed43d567aed9456e7fa6058e",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "application/json": "[\"text/plain+float:16.75\", \"text/plain+float:22.25\", \"text/plain+float:25.0\", \"text/plain+float:20.25\", \"text/plain+float:36.25\"]"
+            "text/plain": ""
           }
         }
       ],
@@ -111,7 +117,7 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "[16.75, 22.25, 25.0, 20.25, 36.25]\n",
+          "text": "[999.99, 22.25, 25.0, 20.25, 36.25]\n",
           "mimetype": "text/plain"
         }
       ]
@@ -136,7 +142,7 @@
         {
           "type": "data",
           "data": {
-            "text/html": "<pre class='text-xs'>16.75</pre>"
+            "text/html": "<pre class='text-xs'>999.99</pre>"
           }
         }
       ],
@@ -175,7 +181,7 @@
         {
           "type": "data",
           "data": {
-            "text/html": "<pre class='text-xs'>120.5</pre>"
+            "text/html": "<pre class='text-xs'>1103.74</pre>"
           }
         }
       ],
@@ -188,7 +194,7 @@
         {
           "type": "data",
           "data": {
-            "application/json": "[\"text/plain+float:16.75\", \"text/plain+float:22.25\", \"text/plain+float:25.0\", \"text/plain+float:20.25\", \"text/plain+float:36.25\"]"
+            "application/json": "[\"text/plain+float:999.99\", \"text/plain+float:22.25\", \"text/plain+float:25.0\", \"text/plain+float:20.25\", \"text/plain+float:36.25\"]"
           }
         }
       ],
@@ -228,7 +234,7 @@
     },
     {
       "id": "KHfd",
-      "code_hash": "b014cdbc8b9712923cff99b099a943ad",
+      "code_hash": "efcf7f1e9dfb8a8cd5ba746a9650abb8",
       "outputs": [
         {
           "type": "data",
@@ -240,20 +246,19 @@
       "console": []
     },
     {
-      "id": "hURL",
-      "code_hash": "e940e10a0401836c9a08230c9088d64b",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
+      "id": "tMRL",
+      "code_hash": null,
+      "outputs": [],
       "console": []
     },
     {
-      "id": "DXGE",
+      "id": "CEeS",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "JeCa",
       "code_hash": null,
       "outputs": [],
       "console": []
@@ -273,14 +278,20 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "5\n",
+          "text": "50\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
-      "id": "luqh",
-      "code_hash": "2ccc9d19851531d6946497005c03a6e5",
+      "id": "Jpsq",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "xZtG",
+      "code_hash": null,
       "outputs": [
         {
           "type": "data",
@@ -289,14 +300,7 @@
           }
         }
       ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stdout",
-          "text": "105\n",
-          "mimetype": "text/plain"
-        }
-      ]
+      "console": []
     },
     {
       "id": "Xcbg",
@@ -326,12 +330,12 @@
     },
     {
       "id": "gaDI",
-      "code_hash": "81f363aa87dc3107f3965a9a27d223ef",
+      "code_hash": "c0f5ef3693536eda7ac0c70ed4940d2b",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<pre class='text-xs'>5</pre>"
+            "text/html": "<pre class='text-xs'>140</pre>"
           }
         }
       ],
@@ -417,8 +421,15 @@
     },
     {
       "id": "nWHF",
-      "code_hash": "fcd5fe5a90d3e8ec5b572d836365a5bf",
-      "outputs": [],
+      "code_hash": "0250e33a40c4905208ec8d52534b0294",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
@@ -429,6 +440,149 @@
           "type": "data",
           "data": {
             "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"explore\">\ud83d\ude4b Explore</h1>\n<span class=\"paragraph\">One line per cell. Write down what you expect before you run it. Every one of these\ndepends on the <strong>type</strong> of the thing you hand it.</span>\n<ol>\n<li><code>freight_charges[-1]</code></li>\n<li><code>freight_charges[:3]</code>, which is a <strong>slice</strong></li>\n<li><code>orders[0]</code> and <code>freight_charges[0]</code>. What do those two have in common?</li>\n<li><code>category = \"Confections\"</code>, then <code>len(category)</code>. <code>len</code> counted five things a moment ago. What is it counting now?</li>\n<li><code>sum(orders)</code>. It runs. Should it?</li>\n<li><code>orders * 2</code>, then <code>orders + freight_charges</code>. Neither one is an error.</li>\n<li><code>sorted(freight_charges)</code>, then <code>sorted(freight_charges, reverse=True)</code>. What did <code>reverse=True</code> change, and did <code>freight_charges</code> itself change?</li>\n</ol></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ymzh",
+      "code_hash": "c0a7a809473e29effbb39c4685dd71f9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>36.25</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZxQB",
+      "code_hash": "20bab0561e08ed42ac58e6591d9ef83f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain+float:999.99\", \"text/plain+float:22.25\", \"text/plain+float:25.0\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "rGqx",
+      "code_hash": "bf92adb311de705be8f740b131eafda6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>10248</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iNzJ",
+      "code_hash": "abd5a46c9b2d6515004aada631c3ff55",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>999.99</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ziJr",
+      "code_hash": "139386743b1df296f8693bbc1710242b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "VBnP",
+      "code_hash": "b8cc9727d967b269366944c811a3f344",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>11</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bCYZ",
+      "code_hash": "3185adb3fd9ee53e74b5778d920b025e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>51250</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SVng",
+      "code_hash": "fed7e1cc5d674b373c287f10d525a895",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[10248, 10249, 10250, 10251, 10252, 10248, 10249, 10250, 10251, 10252]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZpeV",
+      "code_hash": "954c6a48329eec4c1e36f2a6e3b81139",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[10248, 10249, 10250, 10251, 10252, \"text/plain+float:999.99\", \"text/plain+float:22.25\", \"text/plain+float:25.0\", \"text/plain+float:20.25\", \"text/plain+float:36.25\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ouVy",
+      "code_hash": "c868ee09c8177da4fbaedcb30ed7efbe",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain+float:20.25\", \"text/plain+float:22.25\", \"text/plain+float:25.0\", \"text/plain+float:36.25\", \"text/plain+float:999.99\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Zbpd",
+      "code_hash": "ae7555daaeaad700a408a44157317898",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain+float:999.99\", \"text/plain+float:36.25\", \"text/plain+float:25.0\", \"text/plain+float:22.25\", \"text/plain+float:20.25\"]"
           }
         }
       ],
@@ -467,6 +621,45 @@
       "console": []
     },
     {
+      "id": "qBHc",
+      "code_hash": "85b7372dd7e6cd134966f87ca2c4ae52",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain:<class 'float'>\", \"text/plain:<class 'int'>\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DDlF",
+      "code_hash": "12733c57d63809f3c020466c3a4a6e5d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&lt;class &#x27;str&#x27;&gt;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "LtOb",
+      "code_hash": "8c827640c13f9bce9fc2a9af3489c083",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&lt;class &#x27;bool&#x27;&gt;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
       "id": "TqIu",
       "code_hash": "e772d821a86328a255a3c0e7072f418c",
       "outputs": [
@@ -478,6 +671,39 @@
         }
       ],
       "console": []
+    },
+    {
+      "id": "nAKC",
+      "code_hash": "b0edec4e15698beb44aca5790c83e9d8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&#x27;16.7522.25&#x27;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "jZUy",
+      "code_hash": "670df440749065272ea17293d93060d6",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "unsupported operand type(s) for +: 'float' and 'str'",
+          "traceback": null
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">\"/var/folders/fh/dpc6j9hs17l4g7d40h07_t080000gn/T/marimo_43634/__marimo__cell_jZUy_.py\"</span>, line <span class=\"m\">1</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"mf\">16.75</span> <span class=\"o\">+</span> <span class=\"s2\">\"22.25\"</span>\n<span class=\"w\">    </span><span class=\"pm\">~~~~~~^~~~~~~~~</span>\n<span class=\"gr\">TypeError</span>: <span class=\"n\">unsupported operand type(s) for +: 'float' and 'str'</span>\n</pre></div>\n</span>",
+          "mimetype": "application/vnd.marimo+traceback"
+        }
+      ]
     },
     {
       "id": "Vxnm",
@@ -500,6 +726,32 @@
           "type": "data",
           "data": {
             "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"compare-two-charges\">\u270f\ufe0f Compare Two Charges</h1>\n<span class=\"paragraph\">In cells of your own:</span>\n<ol>\n<li>Is the first charge above 20? <code>freight_charges[0] &gt; 20</code></li>\n<li>Is the last charge the largest? <code>freight_charges[-1] == max(freight_charges)</code></li>\n<li>Check the type of either answer with <code>type()</code>.</li>\n</ol>\n<span class=\"paragraph\"><code>==</code> asks whether two values are equal. A single <code>=</code> stores a value.</span>\n<span class=\"paragraph\">\ud83d\udcd6 Handbook: Python \u00a73 Expressions and operators</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "fAfz",
+      "code_hash": "1061f64eea1fdc45d218324185d4bc0d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>True</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "VPcr",
+      "code_hash": "fa74ccaf14ae4d37593fa3e3a8b32203",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>False</pre>"
           }
         }
       ],
@@ -538,6 +790,26 @@
       "console": []
     },
     {
+      "id": "uzbh",
+      "code_hash": "ab81ca09e82b5615c45e533a8eb8a2d5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Order 10248 paid $999.99 in freight.\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
       "id": "ZBYS",
       "code_hash": "ae8593286258fa717ee70a219c0780b9",
       "outputs": [
@@ -549,6 +821,26 @@
         }
       ],
       "console": []
+    },
+    {
+      "id": "xAgm",
+      "code_hash": "6a049cb34c4acf57dd8f4b06409f4d5e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "The total freight is $140.00, and the average charge is $28.00.\n",
+          "mimetype": "text/plain"
+        }
+      ]
     },
     {
       "id": "aLJB",
@@ -583,6 +875,19 @@
       "console": []
     },
     {
+      "id": "CaDu",
+      "code_hash": "99d2afc68739f124c36b434e4f86adcf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain+float:999.99\", \"text/plain+float:22.25\", \"text/plain+float:25.0\", \"text/plain+float:20.25\", \"text/plain+float:36.25\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
       "id": "AjVT",
       "code_hash": "eaff85162f208add7648c4d43810498a",
       "outputs": [
@@ -609,6 +914,19 @@
       "console": []
     },
     {
+      "id": "HlHW",
+      "code_hash": "160f790afc158600f5e636d888629cb6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain+float:22.25\", \"text/plain+float:20.25\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
       "id": "NCOB",
       "code_hash": "ceef6bdc4617e1512188a28309983104",
       "outputs": [
@@ -622,6 +940,77 @@
       "console": []
     },
     {
+      "id": "CYKv",
+      "code_hash": "fee9f277be8055a99c264f94180158e3",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "No module named 'pandsa'",
+          "traceback": null
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">\"/var/folders/fh/dpc6j9hs17l4g7d40h07_t080000gn/T/marimo_43634/__marimo__cell_CYKv_.py\"</span>, line <span class=\"m\">1</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"kn\">import</span><span class=\"w\"> </span><span class=\"nn\">pandsa</span>\n<span class=\"gr\">ModuleNotFoundError</span>: <span class=\"n\">No module named 'pandsa'</span>\n</pre></div>\n</span>",
+          "mimetype": "application/vnd.marimo+traceback"
+        }
+      ]
+    },
+    {
+      "id": "veMZ",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "UmCm",
+      "code_hash": "45003b88d4e0e33f63bf2b637d883f59",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "[Errno 2] No such file or directory: 'sales.csv'",
+          "traceback": null
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">\"/var/folders/fh/dpc6j9hs17l4g7d40h07_t080000gn/T/marimo_43634/__marimo__cell_UmCm_.py\"</span>, line <span class=\"m\">1</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"nb\">open</span><span class=\"p\">(</span><span class=\"s2\">\"sales.csv\"</span><span class=\"p\">)</span>\n<span class=\"w\">    </span><span class=\"pm\">~~~~^^^^^^^^^^^^^</span>\n<span class=\"gr\">FileNotFoundError</span>: <span class=\"n\">[Errno 2] No such file or directory: 'sales.csv'</span>\n</pre></div>\n</span>",
+          "mimetype": "application/vnd.marimo+traceback"
+        }
+      ]
+    },
+    {
+      "id": "NtWd",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ssFF",
+      "code_hash": "21d0481900242f7084e00a1dea5de404",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "syntax",
+          "evalue": "line 1\n    new_charges = [16.75, 22.25\n                  ^\nSyntaxError: '[' was never closed\n",
+          "traceback": []
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BGKS",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
       "id": "aqbW",
       "code_hash": "830409d9361fd16a4b5b79956f3dae62",
       "outputs": [
@@ -629,6 +1018,19 @@
           "type": "data",
           "data": {
             "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"a-line-that-does-not-break\">\ud83d\ude4b A Line That Does Not Break</h1>\n<span class=\"paragraph\">Write down what this gives, then run it in a cell of your own.</span>\n<span class=\"paragraph\"><code>max([\"9.50\", \"16.75\", \"22.25\"])</code></span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bXFE",
+      "code_hash": "3ecb5a15eac460ce6adc166848ad8c47",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&#x27;9.50&#x27;</pre>"
           }
         }
       ],
