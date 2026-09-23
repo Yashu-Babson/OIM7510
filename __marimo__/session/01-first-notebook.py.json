@@ -1050,6 +1050,32 @@
       "console": []
     },
     {
+      "id": "IGuq",
+      "code_hash": "3ecb5a15eac460ce6adc166848ad8c47",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&#x27;9.50&#x27;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aokB",
+      "code_hash": "5a05cad51bc8aaab1be956c4aaab6392",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>22.25</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
       "id": "TXez",
       "code_hash": "9604a4334a5c681e4d051bb1c7468616",
       "outputs": [
@@ -1060,6 +1086,12 @@
           }
         }
       ],
+      "console": []
+    },
+    {
+      "id": "dkyS",
+      "code_hash": null,
+      "outputs": [],
       "console": []
     },
     {
