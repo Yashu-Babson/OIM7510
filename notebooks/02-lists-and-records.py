@@ -173,7 +173,6 @@ def _(cost):
 @app.cell
 def _(cost):
     type(cost)
-
     return
 
 
@@ -181,7 +180,6 @@ def _(cost):
 def _():
     costs = float(input("Enter the costs:)"))
     taxs = float( input("Enter taxs:"))
-
     return
 
 
@@ -687,7 +685,7 @@ def _():
     {"OrderID": 11019, "CustomerID": "RANCH", "ShipCountry": "Argentina", "ShipCity": "Buenos Aires", "OrderDate": "2018-04-13", "ShippedDate": None, "Freight": 11.25},
     {"OrderID": 11039, "CustomerID": "LINOD", "ShipCountry": "Venezuela", "ShipCity": "I. de Margarita", "OrderDate": "2018-04-21", "ShippedDate": None, "Freight": 43.00},
     ]
-    len(orders)
+    len(orders), type(orders), type(orders[0])
     return (orders,)
 
 
@@ -726,6 +724,23 @@ def _(mo):
     **Going further.** Look at the three orders with no `ShippedDate`. What do they have
     in common that the other 27 do not? The answer is not about shipping.
     """)
+    return
+
+
+@app.cell
+def _(orders):
+    len(orders)
+    return
+
+
+@app.cell
+def _(orders):
+    # what is the total freight across all 30 orders?
+    total_freight = 0
+    for order in orders:
+        total_freight += order["Freight"]
+
+    print(total_freight)
     return
 
 
