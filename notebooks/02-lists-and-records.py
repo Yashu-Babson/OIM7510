@@ -605,6 +605,12 @@ def _():
     return (first_order,)
 
 
+@app.cell
+def _(first_order):
+    first_order["ShipCountry"]
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -635,6 +641,24 @@ def _(mo):
     Two of them fail, and both give the same kind of error. Add a cell and find out
     which, and what the message says. A `KeyError` names the key it could not find.
     """)
+    return
+
+
+@app.cell
+def _(first_order):
+    first_order["Freight"]
+    return
+
+
+@app.cell
+def _(first_order):
+    first_order["freight"]
+    return
+
+
+@app.cell
+def _(first_order):
+    first_order[0]
     return
 
 
@@ -735,6 +759,30 @@ def _(orders):
 
 @app.cell
 def _(orders):
+    unshipped_count = 0
+
+    for _order in orders:
+        if _order["ShippedDate"] is None:
+            unshipped_count += 1
+
+    print(unshipped_count)
+    return
+
+
+@app.cell
+def _(orders):
+    largest_order = orders[0]
+
+    for _order in orders:
+        if _order["Freight"] > largest_order["Freight"]:
+            largest_order = _order
+
+    print(largest_order["OrderID"], largest_order["Freight"])
+    return
+
+
+@app.cell
+def _(orders):
     # what is the total freight across all 30 orders?
     total_freight = 0
     for order in orders:
@@ -761,10 +809,15 @@ def _(mo):
     return
 
 
+@app.cell
+def _():
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    *One row is ...*
+    *One row is a single order placed by a customer*
 
     *(Replace this line with your own sentence. If this cell shows you code instead of
     text, use the cell menu to turn it into a markdown cell.)*
@@ -805,6 +858,27 @@ def _():
         {"Symbol": "TSLA", "Shares": 150, "Price": 255.70},
     ]
     portfolio
+    return (portfolio,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    For each holding, multiply the number of shares by the price per share.
+    This gives the cost of that holding.
+    Add the costs of all six holdings to get the total portfolio cost.
+    """)
+    return
+
+
+@app.cell
+def _(portfolio):
+    portfolio_total = 0
+
+    for _holding in portfolio:
+        portfolio_total += _holding["Shares"] * _holding["Price"]
+
+    print(round(portfolio_total, 2))
     return
 
 
@@ -855,6 +929,45 @@ def _(mo):
         _where = f"could not write into {_data_dir}: {_error}"
 
     _where
+    return (portfolio_csv,)
+
+
+@app.cell
+def _():
+    practice_portfolio = [
+        {"Symbol": "AAA", "Shares": 10, "Price": 25.50},
+        {"Symbol": "BBB", "Shares": 8, "Price": 40.00},
+        {"Symbol": "CCC", "Shares": 15, "Price": 12.00},
+    ]
+
+    practice_total = 0
+
+    for _holding in practice_portfolio:
+        practice_total += _holding["Shares"] * _holding["Price"]
+
+    print(round(practice_total, 2))
+    return
+
+
+@app.cell
+def _(portfolio_csv):
+    import csv as _csv
+
+    csv_total = 0
+
+    print("name   shares   price")
+
+    with open(portfolio_csv, newline="", encoding="utf-8") as _file:
+        _reader = _csv.DictReader(_file)
+
+        for _row in _reader:
+            _shares = int(_row["shares"])
+            _price = float(_row["price"])
+
+            print(_row["name"], _shares, _price)
+            csv_total += _shares * _price
+
+    print("Total cost: $" + format(csv_total, ".2f"))
     return
 
 
