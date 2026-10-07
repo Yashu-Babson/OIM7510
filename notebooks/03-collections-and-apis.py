@@ -2,7 +2,7 @@
 # requires-python = ">=3.12"
 # dependencies = [
 #     "marimo",
-#     "requests",
+#     "requests==2.34.2",
 # ]
 # ///
 """Collections and APIs.
@@ -10,7 +10,7 @@
 
 import marimo
 
-__generated_with = "0.24.2"
+__generated_with = "0.25.1"
 app = marimo.App(width="medium", sql_output="polars")
 
 
@@ -157,7 +157,9 @@ def _(mo):
 
     **B France, Germany, Brazil and USA share the highest number of orders, with 4 orders each**
 
-    **C ·**
+    **C List:List — order lines can be added, removed, and rearranged.
+    Set:each customer should appear only once.
+    DictionaryTuplle·**
 
     **D ·**
 
@@ -468,6 +470,17 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    1. list
+    2. set
+    3. dictionary
+    4. tuple
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     ## ✏️ C · Which structure
 
     **In the written answers cell**, name the structure for each, with one reason:
@@ -509,6 +522,31 @@ def _():
         ("TSLA", 150, 255.70),
     ]
     holdings
+    return (holdings,)
+
+
+@app.cell
+def _(holdings):
+    total_cost = 0
+    # use a for loop to iterate every stock to get the share and price of every stock, then calculate the subtotal and add the subtotal to total_cost
+    for stock in holdings:
+        shares = stock[1]
+        price = stock[2]
+        subtotal = shares * price
+        total_cost += subtotal
+
+    total_cost
+    return
+
+
+@app.cell
+def _(holdings):
+    total_cost_ = 0
+    for  _symbol,_shares, _price in holdings:
+        subtotal_ = _shares * _price
+        total_cost_ += subtotal_
+
+    total_cost_
     return
 
 
@@ -578,9 +616,27 @@ def _(requests):
         "&temperature_unit=fahrenheit&wind_speed_unit=mph"
         "&timezone=America/New_York"
     )
+    print(babson_url)
     babson_reply = requests.get(babson_url, timeout=10)
     babson_reply.status_code
     return (babson_reply,)
+
+
+@app.cell
+def _(babson_weather):
+    babson_weather["current"]["temperature_2m"]
+    return
+
+
+@app.cell
+def _(babson_weather):
+    babson_weather["current"]["wind_speed_10m"]
+    return
+
+
+@app.cell
+def _():
+    return
 
 
 @app.cell(hide_code=True)
@@ -700,6 +756,15 @@ def _(mo):
 
     **E · The wind in a sentence.** Add a cell that takes the wind speed and its unit out of `babson_weather` and puts both into one sentence with an f-string. *Check yourself: the unit reads `mp/h`, which is how this service writes miles per hour.*
     """)
+    return
+
+
+@app.cell
+def _(babson_weather):
+    _wind = babson_weather["current"]["wind_speed_10m"]
+    _unit = babson_weather["current_units"]["wind_speed_10m"]
+
+    print(f"The wind speed at Babson is {_wind} {_unit}.")
     return
 
 
