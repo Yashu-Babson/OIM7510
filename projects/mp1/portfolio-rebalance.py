@@ -232,9 +232,7 @@ def _(mo):
     mo.md(r"""
     ## 7. Working With the Agent
 
-    *Pick one piece of AI output you did not accept as-is. What did it give you, what did you change, and how did you know? Point to the commit or the cell.*
-
-    *If the agent got it right the first time: what did you do to verify that?*
+    I used AI to help translate my rebalancing plan into Python, including loops, whole-share rounding, and formatted output. The generated calculation code ran successfully after I corrected my copying errors. I checked the results using the value-conservation check in Section 6: final holdings plus cash equaled the original $121,302.70, and remaining cash was nonnegative. It checks the cash accounting, although it does not alone prove that every target weight is correct.
     """)
     return
 
@@ -243,9 +241,97 @@ def _(mo):
 def _(mo):
     mo.md(r"""
     ## 8. Going Further
+    In reality, buy and sell stocks exist fees(at lease from my knowledge in mainland China, usually selling fees are 0.1% higher than buying fees), so my first attempt would add back those fees.
+    Another apply for me would be, adding a drift threshold to avoid high frequency adjustment, a 5%~7% drift for example(in order to test different results).
 
-    *Take at least one step past the main task, in any direction, and use your agent as much as you like. It does not have to work. State what you tried, what you found, and where it is in this notebook.*
+    Summary:
+    For my extension test in Section 8, I added hypothetical transaction fees of 0.1% for buying and 0.2% for selling, plus a drift threshold to avoid trading when a holding is already close to its target weight. These fees are experiment assumptions, not actual U.S. fee rates. I used AI to help implement the code.
+
+    I tested thresholds of 5, 6, and 7 percentage points. At 5, all six stocks traded. At 6, AAPL stayed unchanged and the other five traded, leaving $7,427.52 in cash with $81.37 in fees. At 7, only NVDA and TSLA traded, leaving $15,305.98 in cash with $50.24 in fees.
+
+    I chose 6 percentage points because it left less cash uninvested than 7, while avoiding the AAPL trade. This experiment showed the tradeoff between reducing trading costs and keeping holdings closer to their target weights. For the final run, account value after trading was $121,221.33; adding back $81.37 in fees matched the original $121,302.70 to the nearest cent, and the reconciliation returned True.
+
+    I totally don't know how to run it btw, my assistant gave me a whole bunch of long codes
     """)
+    return
+
+
+@app.cell
+def _():
+    # Section 8 experiment assumptions—not actual U.S. fee rates.
+    drift_threshold = 0.06  # 0.60%
+    buy_fee_rate = 0.001    # 0.10%
+    sell_fee_rate = 0.002   # 0.20%
+    return buy_fee_rate, drift_threshold, sell_fee_rate
+
+
+@app.cell
+def _(
+    buy_fee_rate,
+    cash,
+    drift_threshold,
+    holdings,
+    portfolio_value,
+    sell_fee_rate,
+    target_weights,
+):
+    extension_trades = []
+    extension_cash = cash
+    extension_fees = 0
+
+    # Select trades using weights before any trading.
+    for _ticker, _shares, _price in holdings:
+        _weight = _shares * _price / portfolio_value
+        _trade = 0
+
+        if abs(_weight - target_weights[_ticker]) > drift_threshold:
+            _target = int(portfolio_value * target_weights[_ticker] // _price)
+            _trade = _target - _shares
+
+        extension_trades.append((_ticker, _shares, _price, _trade))
+        print(_ticker, "threshold:", drift_threshold, "trade:", _trade)
+
+    # Sell first, subtracting selling fees.
+    for _ticker, _shares, _price, _trade in extension_trades:
+        if _trade < 0:
+            _sale_value = -_trade * _price
+            _fee = _sale_value * sell_fee_rate
+            extension_cash = extension_cash + _sale_value - _fee
+            extension_fees = extension_fees + _fee
+
+    # Buy only what available cash can cover, including fees.
+    extension_results = []
+
+    for _ticker, _shares, _price, _trade in extension_trades:
+        if _trade > 0:
+            _affordable = int(
+                extension_cash // (_price * (1 + buy_fee_rate))
+            )
+            _trade = min(_trade, _affordable)
+            _purchase_value = _trade * _price
+            _fee = _purchase_value * buy_fee_rate
+            extension_cash = extension_cash - _purchase_value - _fee
+            extension_fees = extension_fees + _fee
+
+        extension_results.append(
+            (_ticker, _shares + _trade, _price, _trade)
+        )
+
+    # Value the final account after fees.
+    _extension_value = extension_cash
+    for _ticker, _shares, _price, _trade in extension_results:
+        _extension_value = _extension_value + _shares * _price
+
+    print(f"{'Ticker':<7} {'Trade':>7} {'Final shares':>13} {'Weight':>9}")
+    for _ticker, _shares, _price, _trade in extension_results:
+        _weight = _shares * _price / _extension_value
+        print(f"{_ticker:<7} {_trade:>+7d} {_shares:>13} {_weight:>9.2%}")
+
+    print(f"\nRemaining cash: ${extension_cash:,.2f}")
+    print(f"Total fees: ${extension_fees:,.2f}")
+    print(f"Final account value: ${_extension_value:,.2f}")
+    _check = abs(_extension_value + extension_fees - portfolio_value) < 0.01
+    print(f"Value plus fees matches start: {_check}")
     return
 
 
