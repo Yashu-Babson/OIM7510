@@ -105,7 +105,7 @@ def _():
         "NVDA": 0.15,
         "TSLA": 0.15,}
 
-    return cash, holdings
+    return cash, holdings, target_weights
 
 
 @app.cell(hide_code=True)
@@ -129,7 +129,45 @@ def _(cash, holdings):
 
     print(f"Stocks value: ${total:,.2f}")
     print(f"Total including cash: ${portfolio_value:,.2f}")
-    return
+    return (portfolio_value,)
+
+
+@app.cell
+def _(holdings, portfolio_value, target_weights):
+    trades = []
+
+    for _ticker, _shares, _price in holdings:
+        _target_value = portfolio_value * target_weights[_ticker]
+        _target_shares = int(_target_value // _price)
+        _trade = _target_shares - _shares
+
+        trades.append((_ticker, _shares, _price, _target_shares, _trade))
+        print(f"{_ticker}: target {_target_shares} shares, trade {_trade:+d}")
+    return (trades,)
+
+
+@app.cell
+def _(cash, trades):
+    cash_after = cash
+
+    # Sell first: negative trade quantities generate cash.
+    for _ticker, _shares, _price, _target_shares, _trade in trades:
+        if _trade < 0:
+            cash_after = cash_after - _trade * _price
+
+    print(f"Cash after sales: ${cash_after:,.2f}")
+
+    # Buy next: positive trade quantities use cash.
+    for _ticker, _shares, _price, _target_shares, _trade in trades:
+        if _trade > 0:
+            _purchase_cost = _trade * _price
+            if _purchase_cost <= cash_after:
+                cash_after = cash_after - _purchase_cost
+            else:
+                raise ValueError(f"Not enough cash to buy {_ticker}")
+
+    print(f"Cash remaining: ${cash_after:,.2f}")
+    return (cash_after,)
 
 
 @app.cell(hide_code=True)
@@ -137,13 +175,27 @@ def _(mo):
     mo.md(r"""
     ## 5. The Answer
 
-    *A table of your results in the cell below, printed with `print` and f-strings, then one sentence here that answers the question in section 1, with the number in it.*
+    Selling 60 AMZN and 79 TSLA shares funds the purchases shown in the table, leaving $725.62 in cash and every stock within 0.245 percentage points of its target, which I consider close enough given the whole-share constraint.
     """)
     return
 
 
 @app.cell
-def _():
+def _(cash_after, portfolio_value, target_weights, trades):
+    print(f"{'Ticker':<7} {'Now':>6} {'Target':>7} {'Trade':>7} "
+          f"{'Value after':>13} {'Weight':>9} {'Gap (pp)':>10}")
+
+    for _ticker, _shares, _price, _target_shares, _trade in trades:
+        _value_after = _target_shares * _price
+        _weight_after = _value_after / portfolio_value
+        _gap = (_weight_after - target_weights[_ticker]) * 100
+
+        print(f"{_ticker:<7} {_shares:>6} {_target_shares:>7} {_trade:>+7d} "
+              f"{_value_after:>13,.2f} {_weight_after:>9.2%} {_gap:>10.3f}")
+
+    print(f"\nCash remaining: ${cash_after:,.2f}")
+    print(f"Cash weight: {cash_after / portfolio_value:.2%}")
+    print("Positive trades = BUY; negative trades = SELL.")
     return
 
 
