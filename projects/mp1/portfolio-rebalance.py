@@ -204,13 +204,26 @@ def _(mo):
     mo.md(r"""
     ## 6. How I Know These Numbers Are Right
 
-    *At least one check that reaches a result a second, independent way. Name what you compared and what came out.*
+    I compared the original portfolio value, including starting cash, with the final holdings’ value plus remaining cash. I rebuilt final shares as current shares plus trade quantity, then multiplied by the stock prices and added cash. Both totals were $121,302.70, giving a difference of $0.00 to the nearest cent. Remaining cash was $725.62, so the cash balance was nonnegative.
     """)
     return
 
 
 @app.cell
-def _():
+def _(cash_after, portfolio_value, trades):
+    _check_after = cash_after
+
+    for _ticker, _shares, _price, _target_shares, _trade in trades:
+        _final_shares = _shares + _trade
+        _check_after = _check_after + _final_shares * _price
+
+    _difference = _check_after - portfolio_value
+
+    print(f"Value before: ${portfolio_value:,.2f}")
+    print(f"Value after:  ${_check_after:,.2f}")
+    print(f"Difference:   ${_difference:,.2f}")
+    print(f"Value preserved: {abs(_difference) < 0.01}")
+    print(f"Cash nonnegative: {cash_after >= 0}")
     return
 
 
