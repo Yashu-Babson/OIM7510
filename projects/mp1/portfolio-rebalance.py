@@ -86,8 +86,26 @@ def _(mo):
 
 @app.cell
 def _():
-    # Your inputs.
-    return
+    holdings = [
+        ("AAPL", 100, 173.93),
+        ("MSFT", 50, 319.53),
+        ("GOOG", 80, 131.36),
+        ("AMZN", 200, 129.33),
+        ("NVDA", 20, 410.17),
+        ("TSLA", 150, 255.70),
+    ]
+
+    cash = 5000.00
+
+    target_weights = {
+        "AAPL": 0.20,
+        "MSFT": 0.20,
+        "GOOG": 0.15,
+        "AMZN": 0.15,
+        "NVDA": 0.15,
+        "TSLA": 0.15,}
+
+    return cash, holdings
 
 
 @app.cell(hide_code=True)
@@ -101,7 +119,16 @@ def _(mo):
 
 
 @app.cell
-def _():
+def _(cash, holdings):
+    total = 0
+
+    for _ticker, _shares, _price in holdings:
+        total = total + _shares * _price
+
+    portfolio_value = total + cash
+
+    print(f"Stocks value: ${total:,.2f}")
+    print(f"Total including cash: ${portfolio_value:,.2f}")
     return
 
 
