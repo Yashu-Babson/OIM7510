@@ -1,0 +1,266 @@
+:root {
+  --bg: #0b0f14;
+  --panel: #121823;
+  --border: #223047;
+  --text: #e9edf2;
+  --muted: #9fb0c3;
+  --accent: #4fd1a5;
+  --danger: #ff6b6b;
+  --blue: #5aa9ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.slide {
+  min-height: 100vh;
+  padding: 6rem 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.eyebrow {
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  margin: 0 0 1rem;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 2rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1.2rem;
+  max-width: 40ch;
+}
+
+.byline {
+  margin-top: 2.5rem;
+  color: var(--muted);
+}
+
+/* Slide 1 - hero */
+#slide-1 {
+  background: linear-gradient(rgba(11, 15, 20, 0.75), rgba(11, 15, 20, 0.92)), url("images/slide1_1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Slide 2 - thresholds */
+.cards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  flex: 1;
+  min-width: 240px;
+}
+
+.card .label {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.card .value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin: 0.3rem 0;
+}
+
+.card .result {
+  color: var(--text);
+  white-space: pre-line;
+}
+
+.takeaway {
+  font-size: 1.2rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Slide 3 - then vs now */
+.compare {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.compare .column {
+  flex: 1;
+  min-width: 220px;
+}
+
+.compare h3 {
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.flow .arrow {
+  color: var(--accent);
+}
+
+.duration {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.bg-photo {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/slide3_1.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  z-index: 0;
+}
+
+#slide-3 > * { position: relative; z-index: 1; }
+
+.footnote {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Slide 4 - chart */
+.chart-caption {
+  color: var(--muted);
+  max-width: 60ch;
+  margin-bottom: 2rem;
+}
+
+.chart-img {
+  max-width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+/* Slide 5 - stats */
+.stats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  flex: 1;
+  min-width: 220px;
+  text-align: center;
+}
+
+.stat .number {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.stat.loss .number { color: var(--danger); }
+.stat.hold .number { color: var(--danger); }
+.stat.saved .number { color: var(--accent); }
+
+.stat .caption {
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+/* Slide 6 - poll */
+.poll-question {
+  color: var(--muted);
+  max-width: 60ch;
+  margin-bottom: 2.5rem;
+}
+
+.options {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.option {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  flex: 1;
+  min-width: 240px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.option:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: #10251c;
+}
+
+.option .letter {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #06111f;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.prompt {
+  font-size: 1.3rem;
+  color: var(--blue);
+}
+
+@media (max-width: 640px) {
+  .slide { padding: 4rem 6vw; }
+}

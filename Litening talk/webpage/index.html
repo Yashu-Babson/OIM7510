@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Would AI Have Made My Trade?</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="slide" id="slide-1">
+  <div class="eyebrow">OIM7510 · LIGHTNING TALK</div>
+  <h1>Would AI Have Made My Trade?</h1>
+  <p class="subtitle">From a class mini-project, to a trading room, and back</p>
+  <p class="byline">Yashu · Oct 20, 2026</p>
+</section>
+
+<section class="slide" id="slide-2">
+  <div class="eyebrow">I wrote the rule. The code followed it.</div>
+  <h2>Mini-project 1: a simple portfolio tool</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="label">Rebalancing threshold</div>
+      <div class="value">5 pts</div>
+      <div class="result">More trades
+Higher fees</div>
+    </div>
+    <div class="card">
+      <div class="label">Rebalancing threshold</div>
+      <div class="value">7 pts</div>
+      <div class="result">Fewer trades, lower fees
+But more idle cash</div>
+    </div>
+  </div>
+  <p class="takeaway">The code follows the rule. Choosing the rule is the real decision.</p>
+</section>
+
+<section class="slide" id="slide-3">
+  <div class="bg-photo"></div>
+  <div class="eyebrow">A few years ago, this took a team</div>
+  <h2>Our trading room</h2>
+  <div class="compare">
+    <div class="column">
+      <h3>THEN</h3>
+      <div class="flow">
+        <span>Trader</span><span class="arrow">&rarr;</span>
+        <span>PM</span><span class="arrow">&rarr;</span>
+        <span>IT developers</span>
+      </div>
+      <div class="duration">Weeks to months</div>
+    </div>
+    <div class="column">
+      <h3>NOW</h3>
+      <div class="flow"><span>One person + AI coding tools</span></div>
+      <div class="duration">Days</div>
+    </div>
+  </div>
+  <p class="footnote">And Jane Street now runs AI on custom Etched chips.</p>
+</section>
+
+<section class="slide" id="slide-4">
+  <div class="eyebrow">When the rule breaks</div>
+  <h2>IF300 futures vs. the ETF</h2>
+  <p class="chart-caption">IF300 futures and the ETF track the same 300 stocks. Normally, the gap stays within about &plusmn;20 points.</p>
+  <img class="chart-img" src="images/slide4_1.png" alt="Spread between IF300 futures and ETF widening during an extreme market, from a normal range of about plus or minus 20 points to 180 points at the peak">
+</section>
+
+<section class="slide" id="slide-5">
+  <div class="eyebrow">Sometimes there is no second chance</div>
+  <h2>&nbsp;</h2>
+  <div class="stats">
+    <div class="stat loss">
+      <div class="number">&minus;50M</div>
+      <div class="caption">RMB loss we took by cutting the position</div>
+    </div>
+    <div class="stat hold">
+      <div class="number">&minus;200M</div>
+      <div class="caption">RMB loss if we had held (the stock was later liquidated)</div>
+    </div>
+    <div class="stat saved">
+      <div class="number">150M saved</div>
+      <div class="caption">&nbsp;</div>
+    </div>
+  </div>
+  <p class="footnote">We know the 200M now. I had to decide before anyone knew, with no prior data like it.</p>
+</section>
+
+<section class="slide" id="slide-6">
+  <div class="eyebrow">Would you authorize the exit?</div>
+  <p class="poll-question">An AI recommends closing a position and realizing a large loss. You cannot yet know whether it is right.</p>
+  <div class="options">
+    <div class="option" data-choice="A">
+      <div class="letter">A</div>
+      <div>Let the AI execute</div>
+    </div>
+    <div class="option" data-choice="B">
+      <div class="letter">B</div>
+      <div>Require human approval</div>
+    </div>
+  </div>
+  <p class="prompt">What would change your answer?</p>
+</section>
+
+<script>
+  document.querySelectorAll(".option").forEach(function (opt) {
+    opt.addEventListener("click", function () {
+      document.querySelectorAll(".option").forEach(function (o) { o.classList.remove("selected"); });
+      opt.classList.add("selected");
+    });
+  });
+</script>
+
+</body>
+</html>
