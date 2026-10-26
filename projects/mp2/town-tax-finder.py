@@ -373,7 +373,17 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ## 7. Explain Two Functions
+    ## 7. Working With the Agent
+
+    I checked the AI-generated fetching code by comparing the number of towns collected with the total reported by the API. Section 6 shows that both counts were 54. This supported the completeness of my town collection, although it did not verify the tax figures themselves.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## 8. Reading it Back
 
     ### get_county_towns(county_name)
 
@@ -389,7 +399,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ## 8. Change an Input
+    Change an Input
 
     Test lowering the home-value budget from $700,000 to $600,000, keeping the other inputs unchanged.
 
@@ -446,6 +456,15 @@ def _(ranked_towns):
 def _(mo):
     mo.md(r"""
     After re-ordering by residential tax rate, the oder changed, for example Malden dropped from 1st to 4th, while Dracut popped up from 3rd to 1st, with both ranking by rate; the result tells a lower tax rate doesn't always mean a lower bill, because home values differ.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## 10. Time Spent
+    Roughly 3 hours with agent alongside
     """)
     return
 
