@@ -81,7 +81,7 @@ def _(mo):
 @app.cell
 def _():
     county = "Middlesex"
-    budget_dollars = 700000
+    budget_dollars = 600000
     tax_limit_dollars = 8000
     fiscal_year = 2026
     return budget_dollars, county, fiscal_year, tax_limit_dollars
@@ -401,7 +401,51 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
- 
+    ### Results
+
+    After lowering the home-value budget from 700k to 600k, qualifying towns dropped from 12 to 10, with two towns no longer qualify. Malden remains eligible because its average home value is $434420, below both budgets. And Malden also remains the lowerst bill town at $4952
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## 9. Going Further
+    ### Ranking by tax rate instead of tax bill
+    """)
+    return
+
+
+@app.cell
+def _(ranked_towns):
+    def get_tax_rate(town_record):
+        return town_record["residential_rate_per_thousand"]
+
+
+    rate_ranked_towns = sorted(
+        ranked_towns,
+        key=get_tax_rate,
+    )
+
+    print("Order by average tax bill:")
+    for _bill_position, _bill_town in enumerate(ranked_towns, start=1):
+        print(_bill_position, _bill_town["name"])
+
+    print("\nOrder by residential tax rate:")
+    for _rate_position, _rate_town in enumerate(rate_ranked_towns, start=1):
+        print(
+            _rate_position,
+            _rate_town["name"],
+            f"${_rate_town['residential_rate_per_thousand']:.2f} per $1,000",
+        )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    After re-ordering by residential tax rate, the oder changed, for example Malden dropped from 1st to 4th, while Dracut popped up from 3rd to 1st, with both ranking by rate; the result tells a lower tax rate doesn't always mean a lower bill, because home values differ.
     """)
     return
 
