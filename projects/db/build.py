@@ -125,12 +125,45 @@ def _(database, duckdb):
 
 
 @app.cell
+def _(mo):
+    mo.md("""
+    ## Answers I Already Knew
+    """)
+    return
+
+
+@app.cell
 def _(ask):
     # Prediction: member 1 owns two portfolios.
     ask("""
         SELECT COUNT(*) AS portfolio_count
         FROM portfolios
         WHERE member_id = 1
+    """)
+    return
+
+
+@app.cell
+def _(ask):
+    # Prediction: NOVA (asset 12) has never been traded.
+    ask("""
+        SELECT asset_id, ticker
+        FROM assets
+        WHERE asset_id NOT IN (
+            SELECT asset_id FROM trades
+        )
+    """)
+    return
+
+
+@app.cell
+def _(ask):
+    # Prediction: asset 1 has two ticker-history records.
+    ask("""
+        SELECT asset_id, effective_from, ticker
+        FROM ticker_history
+        WHERE asset_id = 1
+        ORDER BY effective_from
     """)
     return
 
