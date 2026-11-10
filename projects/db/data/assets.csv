@@ -1,0 +1,13 @@
+asset_id,ticker,name,asset_type,sector
+1,ALPN,Alpine Software,stock,Technology
+2,BRGT,Bright Grid,stock,Utilities
+3,CRST,Crest Bank,stock,Financials
+4,DLTA,Delta Health,stock,Healthcare
+5,EVRG,Evergreen Foods,stock,Consumer Staples
+6,FRGE,Forge Industries,stock,Industrials
+7,CORE,Core Market Fund,ETF,Broad Market
+8,GRWT,Growth Fund,ETF,Growth
+9,BOND,Bond Index Fund,ETF,Fixed Income
+10,INTL,International Equity Fund,ETF,International
+11,ORBT,Orbit Coin,crypto,
+12,NOVA,Nova Coin,crypto,
