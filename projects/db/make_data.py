@@ -74,11 +74,7 @@ for asset_id, ticker, name, asset_type, sector in assets:
             closing_prices.append([asset_id, day.isoformat(), f"{price_cents / 100:.2f}"])
         day += timedelta(days=1)
 
-write_csv(
-    "closing_prices.csv",
-    ["asset_id", "price_date", "close_price"],
-    closing_prices,
-)
+
 
 print(f"Generated {len(assets)} assets and {len(closing_prices)} closing prices.")
 
@@ -90,11 +86,6 @@ for asset_id, ticker, *_ in assets:
 
 ticker_history.append([1, "2026-05-04", "ALPN"])
 
-write_csv(
-    "ticker_history.csv",
-    ["asset_id", "effective_from", "ticker"],
-    ticker_history,
-)
 
 # Give each portfolio four assets to trade. Leave asset 12 untraded.
 assets_by_portfolio = {
@@ -139,5 +130,38 @@ write_csv(
      "side", "quantity", "trade_price", "fee"],
     trades,
 )
+write_csv(
+    "ticker_history.csv",
+    ["asset_id", "effective_from", "ticker"],
+    ticker_history,
+)
 
 print(f"Generated {len(ticker_history)} ticker history rows and {len(trades)} trades.")
+
+# Pick two trades whose asset and date are unique in the trade list.
+trade_key_counts = {}
+for trade in trades:
+    key = (trade[2], trade[3])  # asset_id, trade_date
+    trade_key_counts[key] = trade_key_counts.get(key, 0) + 1
+
+missing_price_trades = [
+    trade for trade in trades
+    if trade[2] != 1 and trade_key_counts[(trade[2], trade[3])] == 1
+][:2]
+
+assert len(missing_price_trades) == 2
+missing_price_keys = {(trade[2], trade[3]) for trade in missing_price_trades}
+
+closing_prices_for_csv = [
+    row for row in closing_prices
+    if (row[0], row[1]) not in missing_price_keys
+]
+
+for trade in missing_price_trades:
+    print(f"Missing close: trade {trade[0]}, asset {trade[2]}, date {trade[3]}")
+
+write_csv(
+    "closing_prices.csv",
+    ["asset_id", "price_date", "close_price"],
+    closing_prices_for_csv,
+)
