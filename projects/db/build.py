@@ -4,6 +4,51 @@ __generated_with = "0.25.2"
 app = marimo.App()
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## The Data
+
+    I deliberately omitted two closing prices to test the rule that every trade must have a closing price for the same asset and date. The exceptions are trade 31 (asset 7, 2025-11-21) and trade 32 (asset 7, 2025-12-02).
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## A Look at the Data
+    """)
+    return
+
+
+@app.cell
+def _(data_dir):
+    import polars as pl
+    import matplotlib.pyplot as plt
+
+    _prices = (
+        pl.read_csv(data_dir / "closing_prices.csv", try_parse_dates=True)
+        .filter(pl.col("asset_id") == 1)
+        .sort("price_date")
+    )
+
+    _fig, _ax = plt.subplots()
+    _ax.plot(_prices["price_date"].to_list(), _prices["close_price"].to_list())
+    _ax.set(title="Asset 1 (ALPS → ALPN)", xlabel="Date", ylabel="Closing price ($)")
+    _fig.autofmt_xdate()
+    _fig
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Asset 1 peaked near $95 in January and ended near $69 in November. The day-to-day fluctuations look plausible for a stock, but the prices are simulated. I used the asset ID to keep one continuous series when the ticker changed from ALPS to ALPN.
+    """)
+    return
+
+
 @app.cell
 def _():
     import duckdb
@@ -71,7 +116,7 @@ def _():
                 UNIQUE (portfolio_id, asset_id, trade_date)
             );
         """)
-    
+
         # Load parent tables before the tables that reference them.
         tables = ("members", "portfolios", "assets", "closing_prices",
                   "ticker_history", "trades")
@@ -81,32 +126,29 @@ def _():
                 f"INSERT INTO {table} SELECT * FROM read_csv(?, header=true)",
                 [str(data_dir / f"{table}.csv")],
             )
-
+        con.execute("""
+            CREATE VIEW holding_movements AS
+            SELECT portfolio_id,
+                   asset_id,
+                   trade_date,
+                   CASE WHEN side = 'BUY' THEN quantity
+                        ELSE -quantity
+                   END AS unit_change
+            FROM trades
+        """)
+    
         row_counts = []
         for table in tables:
             count = con.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
             row_counts.append(f"- **{table}:** {count:,}")
 
     mo.md("## Row Counts\n\n" + "\n".join(row_counts))
-    return database, duckdb, mo
+    return data_dir, database, duckdb, mo
 
 
 @app.cell
-def _(database, duckdb, mo):
-    with duckdb.connect(database) as _con:
-        _con.execute("BEGIN TRANSACTION")
-        try:
-            _con.execute("""
-                INSERT INTO trades
-                VALUES (9999, 2, 1, DATE '2025-11-03', 'BUY', 0, 88.65, 0)
-            """)
-            _message = "Unexpected: DuckDB accepted a trade with zero quantity."
-        except duckdb.ConstraintException as _error:
-            _message = f"DuckDB refused the trade: {_error}"
-        finally:
-            _con.execute("ROLLBACK")
-
-    mo.md(f"## Row It Refuses\n\n{_message}")
+def _(ask):
+    ask("SELECT * FROM holding_movements ORDER BY portfolio_id, asset_id, trade_date LIMIT 5")
     return
 
 
@@ -164,6 +206,35 @@ def _(ask):
         FROM ticker_history
         WHERE asset_id = 1
         ORDER BY effective_from
+    """)
+    return
+
+
+@app.cell
+def _(database, duckdb, mo):
+    with duckdb.connect(database) as _con:
+        _con.execute("BEGIN TRANSACTION")
+        try:
+            _con.execute("""
+                INSERT INTO trades
+                VALUES (9999, 2, 1, DATE '2025-11-03', 'BUY', 0, 88.65, 0)
+            """)
+            _message = "Unexpected: DuckDB accepted a trade with zero quantity."
+        except duckdb.ConstraintException as _error:
+            _message = f"DuckDB refused the trade: {_error}"
+        finally:
+            _con.execute("ROLLBACK")
+
+    mo.md(f"## Row It Refuses\n\n{_message}")
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## A View
+
+    holding_movements records buys as positive units and sells as negative units. Summing those changes through a chosen date gives the units held for each portfolio and asset.
     """)
     return
 
